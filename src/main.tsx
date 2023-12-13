@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
-import App2 from "./App2.tsx";
+import App from "./App";
+import App2 from "./App2";
 import "./index.css";
 import "devextreme/dist/css/dx.light.css";
 

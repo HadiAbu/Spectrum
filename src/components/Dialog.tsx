@@ -1,10 +1,13 @@
 import { Button } from "devextreme-react";
 import { Popup } from "devextreme-react/popup";
 import RocketStatus from "./RocketStatus";
+import ThreeGauges from "../charts/ThreeGauges";
 
 import axios from "axios";
 import styled from "styled-components";
+
 import { ActOnSpectrumUrl } from "../constants/CONSTANTS";
+import { Stats } from "../types/Stats";
 
 const DialogContent = styled.div`
   display: flex;
@@ -17,13 +20,12 @@ const DialogContent = styled.div`
 interface DialogProps {
   open: boolean;
   onClose: () => void;
-  isAscending: boolean | undefined;
-  message: string | undefined;
+  stats: Stats;
 }
 /**
  * Our Dialog componenet to display the status of the rocket when action is required
  */
-const Dialog = ({ open, onClose, isAscending, message }: DialogProps) => {
+const Dialog = ({ open, onClose, stats }: DialogProps) => {
   const actionRequired = async () => {
     try {
       // Make a request to the ActOnSpectrum endpoint
@@ -45,11 +47,15 @@ const Dialog = ({ open, onClose, isAscending, message }: DialogProps) => {
       showCloseButton={true}
       showTitle={true}
       title="Action Required!"
-      width={350}
-      height={300}
+      width={920}
+      height={600}
     >
       <DialogContent>
-        <RocketStatus statusMessage={message} isAscending={isAscending} />
+        <RocketStatus
+          statusMessage={stats.statusMessage}
+          isAscending={stats.isAscending}
+        />
+        <ThreeGauges stats={stats} />
         <Button
           text="Act on Spectrum"
           type="success"

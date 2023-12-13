@@ -7,6 +7,7 @@ import { Button } from "devextreme-react";
 
 import styled from "styled-components";
 import { WebSocketUrl } from "./constants/CONSTANTS";
+import { Stats } from "./types/Stats";
 
 const Wrapper = styled.div`
   display: flex;
@@ -111,6 +112,14 @@ const App2 = () => {
     temperature &&
     temperature.length != 0;
 
+  const stats: Stats = {
+    velocity: velocity[velocity.length - 1],
+    altitude: altitude[altitude.length - 1],
+    temperature: temperature[temperature.length - 1],
+    statusMessage: statusMessage,
+    isAscending: isAscending,
+  };
+
   if (loading) return <Spinner />;
 
   return (
@@ -135,12 +144,7 @@ const App2 = () => {
       ) : null}
 
       {openDialog && (
-        <Dialog
-          open={openDialog}
-          onClose={onCloseDialog}
-          message={statusMessage}
-          isAscending={isAscending}
-        />
+        <Dialog open={openDialog} onClose={onCloseDialog} stats={stats} />
       )}
     </>
   );

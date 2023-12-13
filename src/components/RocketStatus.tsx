@@ -20,13 +20,13 @@ const RocketStatus = ({
   return (
     <>
       {statusMessage ? <StatusSection>{statusMessage}</StatusSection> : null}
-      {isAscending && (
+      {isAscending != null && (
         <p>
           The Spacecraft is currently{" "}
           <strong>{isAscending ? "Ascending" : "Descending"}</strong>
         </p>
       )}
-      {isActionRequired && (
+      {isActionRequired != null && (
         <h2>Requires Action: {isActionRequired ? "Yes" : "No"}</h2>
       )}
     </>
