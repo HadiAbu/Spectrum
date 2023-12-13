@@ -18,7 +18,9 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
 `;
-// first assignment, display stats
+/**
+ * first assignment, display data coming from API
+ */
 function App() {
   const [stats, setStats] = useState<Stats>();
   const [loading, setLoading] = useState(false);
@@ -48,7 +50,6 @@ function App() {
       ) : (
         <>
           <h1>Spectrum Stats</h1>
-          {/* <WebSocketComponent /> */}
           {stats && (
             <>
               <RocketStatus

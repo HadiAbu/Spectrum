@@ -48,7 +48,9 @@ const Loader = styled.div`
     }
   }
 `;
-
+/**
+ * Spinner/Loader component
+ */
 const Spinner = () => {
   return (
     <Container>

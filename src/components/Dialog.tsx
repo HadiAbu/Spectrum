@@ -1,9 +1,10 @@
 import { Button } from "devextreme-react";
 import { Popup } from "devextreme-react/popup";
-import { ActOnSpectrumUrl } from "../constants/CONSTANTS";
+import RocketStatus from "./RocketStatus";
+
 import axios from "axios";
 import styled from "styled-components";
-import RocketStatus from "./RocketStatus";
+import { ActOnSpectrumUrl } from "../constants/CONSTANTS";
 
 const DialogContent = styled.div`
   display: flex;
@@ -19,16 +20,17 @@ interface DialogProps {
   isAscending: boolean | undefined;
   message: string | undefined;
 }
-
+/**
+ * Our Dialog componenet to display the status of the rocket when action is required
+ */
 const Dialog = ({ open, onClose, isAscending, message }: DialogProps) => {
   const actionRequired = async () => {
     try {
       // Make a request to the ActOnSpectrum endpoint
       const response = await axios.get(ActOnSpectrumUrl);
 
-      // Handle the response as needed
-      const responseData = response;
-      console.log("ActOnSpectrum response:", responseData);
+      // no data is coming back from the API call, so we don't need to do anything
+      console.log("ActOnSpectrum response:", response);
       onClose();
     } catch (error) {
       console.error("Error in ActOnSpectrum:", error);
@@ -47,11 +49,7 @@ const Dialog = ({ open, onClose, isAscending, message }: DialogProps) => {
       height={300}
     >
       <DialogContent>
-        <RocketStatus
-          statusMessage={message}
-          // isActionRequired={liveData?.IsActionRequired}
-          isAscending={isAscending}
-        />
+        <RocketStatus statusMessage={message} isAscending={isAscending} />
         <Button
           text="Act on Spectrum"
           type="success"
@@ -59,7 +57,6 @@ const Dialog = ({ open, onClose, isAscending, message }: DialogProps) => {
           onClick={() => actionRequired()}
         />
       </DialogContent>
-      {/* <Position at="center" my="center" collision="fit" /> */}
     </Popup>
   );
 };

@@ -1,5 +1,3 @@
-// import { Status } from "./Status";
-
 export interface Stats {
   velocity: number;
   altitude: number;

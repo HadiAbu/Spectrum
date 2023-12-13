@@ -1,14 +1,17 @@
 import styled from "styled-components";
 
+const StatusSection = styled.h2`
+  text-align: center;
+`;
+
 type RocketProps = {
   statusMessage: string | undefined;
   isAscending: boolean | undefined;
   isActionRequired?: boolean | undefined;
 };
-
-const StatusSection = styled.h2`
-  text-align: center;
-`;
+/**
+ * a component to display the status of the rocket and if to perform an action
+ */
 const RocketStatus = ({
   statusMessage,
   isAscending,
@@ -17,13 +20,13 @@ const RocketStatus = ({
   return (
     <>
       {statusMessage ? <StatusSection>{statusMessage}</StatusSection> : null}
-      {isAscending != null && (
+      {isAscending && (
         <p>
           The Spacecraft is currently{" "}
           <strong>{isAscending ? "Ascending" : "Descending"}</strong>
         </p>
       )}
-      {isActionRequired != null && (
+      {isActionRequired && (
         <h2>Requires Action: {isActionRequired ? "Yes" : "No"}</h2>
       )}
     </>
