@@ -2,6 +2,11 @@ Web Frontend Software Engineer: Assignment
 
 “Spectrum”, the launch vehicle built by Isar Aerospace just performed a successful lift-off from the launch pad and is flying towards Earth orbit. A web service provides live insights into Spectrum’s sensor system during its maiden flight. Your task is to visualize these sensor values in a web interface so that the crew in ground control can check if everything is okay.
 
+To run this project, run the following commands in the terminal:
+
+1. npm i
+2. npm run dev
+
 Task 1:
 
 in main.tsx file comment out the App2 component and add App component
