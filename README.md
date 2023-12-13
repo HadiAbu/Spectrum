@@ -1,30 +1,22 @@
-# React + TypeScript + Vite
+Web Frontend Software Engineer: Assignment
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+“Spectrum”, the launch vehicle built by Isar Aerospace just performed a successful lift-off from the launch pad and is flying towards Earth orbit. A web service provides live insights into Spectrum’s sensor system during its maiden flight. Your task is to visualize these sensor values in a web interface so that the crew in ground control can check if everything is okay.
 
-Currently, two official plugins are available:
+Task 1:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+in main.tsx file comment out the App2 component and add App component
 
-## Expanding the ESLint configuration
+Task 2:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+in main.tsx file comment out the App component and add App2 component
 
-- Configure the top-level `parserOptions` property like this:
+Task 3:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+Please comment on potential improvements of the API structure, deviations from common standards or performance enhancements.
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+answer:
+
+1. adding pause/continue API options for better communication via the websocket when action is required
+2. making actOnSpectrum API of type POST/PUT
+3. preserve consistency: I would try to make the data keys coming from the APIs as lower case (in the first API endpoint velocity, altitiude, temperature are lower case and in the second these keys are coming back as capitalized)
+4. add timestamps to the objects coming back from the API
