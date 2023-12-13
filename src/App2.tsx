@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 
 import Dialog from "./components/Dialog";
-import styled from "styled-components";
 import Spinner from "./components/Spinner";
 import Line from "./charts/Line";
 import { Button } from "devextreme-react";
 
+import styled from "styled-components";
 import { WebSocketUrl } from "./constants/CONSTANTS";
 
 const Wrapper = styled.div`
@@ -13,8 +13,10 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
 `;
-// second assignment, display live data
 
+/**
+ * Second assignment, open a websocket and display live data
+ */
 const App2 = () => {
   const [velocity, setVelocity] = useState<number[]>([]);
   const [altitude, setAltitude] = useState<number[]>([]);
@@ -77,6 +79,7 @@ const App2 = () => {
       });
     };
     connectWebSocket();
+
     // Cleanup function to close the WebSocket connection when the component unmounts
     return () => {
       console.log("Closing WebSocket connection");
@@ -99,7 +102,8 @@ const App2 = () => {
     setOpenDialog(false);
     togglePause();
   };
-  const validMeasures =
+
+  const checkMeasures =
     velocity &&
     velocity.length != 0 &&
     altitude &&
@@ -108,10 +112,11 @@ const App2 = () => {
     temperature.length != 0;
 
   if (loading) return <Spinner />;
+
   return (
     <>
       <h1>Spectrum Live Data</h1>
-      {validMeasures ? (
+      {checkMeasures ? (
         <>
           <Wrapper>
             <Line dataset={velocity} title="Velocity (km/h)" color="Pastel" />
