@@ -1,24 +1,18 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 import Dialog from "./components/Dialog";
 import Spinner from "./components/Spinner";
-import Line from "./charts/Line";
+import ThreeLinesChart from "./charts/ThreeLinesChart";
 import { Button } from "devextreme-react";
 
-import styled from "styled-components";
 import { WebSocketUrl } from "./constants/CONSTANTS";
 import { Stats } from "./types/Stats";
-
-const Wrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
 
 /**
  * Second assignment, open a websocket and display live data
  */
 const App2 = () => {
+  let timeout: number | undefined;
   const [velocity, setVelocity] = useState<number[]>([]);
   const [altitude, setAltitude] = useState<number[]>([]);
   const [temperature, setTemperature] = useState<number[]>([]);
@@ -31,22 +25,16 @@ const App2 = () => {
   const [socket, setWebSocket] = useState(new WebSocket(WebSocketUrl));
 
   useEffect(() => {
-    // let socket: WebSocket;
     const connectWebSocket = () => {
-      //   socket = new WebSocket(WebSocketUrl);
-
       // Define the WebSocket endpoint URL
       // Event listener for when the connection is opened
-      socket.addEventListener("open", (event) => {
-        console.log("WebSocket connection opened:", event);
-      });
+      socket.addEventListener("open", () => {});
 
       // Event listener for when a message is received from the server
       socket.addEventListener("message", async (event) => {
         try {
           // Check if the component is not paused before processing the message
           if (!isPaused) {
-            console.log("Received message:", event.data);
             setLoading(true);
             // Parse the received data
             const data = JSON.parse(event.data);
@@ -71,28 +59,22 @@ const App2 = () => {
       });
 
       // Event listener for errors
-      socket.addEventListener("error", (event) => {
-        console.error("WebSocket error:", event);
+      socket.addEventListener("error", () => {
         socket.close();
-        setTimeout(() => {
-          setWebSocket(new WebSocket(WebSocketUrl));
-        }, 1000);
+        resetTimeout();
       });
 
       // Event listener for when the connection is closed
-      socket.addEventListener("close", (event) => {
-        console.log("WebSocket connection closed:", event);
-        setTimeout(() => {
-          setWebSocket(new WebSocket(WebSocketUrl));
-        }, 1000);
+      socket.addEventListener("close", () => {
+        resetTimeout();
       });
     };
     connectWebSocket();
 
-    // Cleanup function to close the WebSocket connection when the component unmounts
+    // Cleanup function to close the WebSocket connection and timeout event when the component unmounts
     return () => {
-      console.log("Closing WebSocket connection");
       socket.close();
+      clearTimeout(timeout);
     };
   }, [isPaused, socket]);
 
@@ -100,7 +82,11 @@ const App2 = () => {
     setIsPaused((prevState) => !prevState);
     setWebSocket(new WebSocket(WebSocketUrl));
   };
-
+  const resetTimeout = () => {
+    timeout = setTimeout(() => {
+      setWebSocket(new WebSocket(WebSocketUrl));
+    }, 1000);
+  };
   const onCloseDialog = () => {
     setOpenDialog(false);
     togglePause();
@@ -127,13 +113,13 @@ const App2 = () => {
   return (
     <>
       <h1>Spectrum Live Data</h1>
-      {checkMeasures ? (
+      {checkMeasures && (
         <>
-          <Wrapper>
-            <Line dataset={velocity} title="Velocity (km/h)" color="Pastel" />
-            <Line dataset={temperature} title="Temperature (c)" color="Ocean" />
-            <Line dataset={altitude} title="Altitude (km)" color="Soft" />
-          </Wrapper>
+          <ThreeLinesChart
+            velocity={velocity}
+            altitude={altitude}
+            temperature={temperature}
+          />
           <Button
             onClick={() => togglePause()}
             type={isPaused ? "success" : "danger"}
@@ -143,8 +129,7 @@ const App2 = () => {
               : "Stop receiving live updates"}
           </Button>
         </>
-      ) : null}
-
+      )}
       {openDialog && (
         <Dialog open={openDialog} onClose={onCloseDialog} stats={stats} />
       )}
