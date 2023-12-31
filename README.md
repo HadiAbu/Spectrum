@@ -25,3 +25,4 @@ answer:
 2. making actOnSpectrum API of type POST/PUT
 3. preserve consistency: I would try to make the data keys coming from the APIs as lower case (in the first API endpoint velocity, altitiude, temperature are lower case and in the second these keys are coming back as capitalized)
 4. add timestamps to the objects coming back from the API
+5. adding authentication headers for security.
