@@ -1,4 +1,3 @@
-// import React from "react";
 import CircularGauge, {
   Font,
   Margin,
@@ -32,11 +31,7 @@ const Gauge = ({
     <Wrapper>
       <CircularGauge value={gaugeValue} containerBackgroundColor="red">
         <Margin top={10} bottom={10} left={30} right={45} />
-        <Scale
-          startValue={minValue}
-          endValue={maxValue}
-          //   tickInterval={5}
-        ></Scale>
+        <Scale startValue={minValue} endValue={maxValue}></Scale>
         <RangeContainer>
           <Range startValue={minValue} endValue={maxValue} color={color} />
         </RangeContainer>

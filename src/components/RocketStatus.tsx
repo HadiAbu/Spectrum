@@ -1,16 +1,20 @@
 import styled from "styled-components";
 
-const StatusSection = styled.h2`
-  text-align: center;
-`;
-
 type RocketProps = {
   statusMessage: string | undefined;
   isAscending: boolean | undefined;
   isActionRequired?: boolean | undefined;
 };
+
+const StatusSection = styled.h2`
+  text-align: center;
+`;
+
 /**
- * a component to display the status of the rocket and if to perform an action
+ * @param statusMessage
+ * @param isAscending
+ * @param isActionRequired
+ * @returns a component to display the status of the rocket and if to perform an action
  */
 const RocketStatus = ({
   statusMessage,

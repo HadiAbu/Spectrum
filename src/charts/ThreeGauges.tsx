@@ -11,7 +11,11 @@ const Wrapper = styled.div`
 interface ThreeGaugesProps {
   stats: Stats;
 }
-
+/**
+ *
+ * @param stats
+ * @returns Three Gauges Displaying our Stats
+ */
 const ThreeGauges = ({ stats }: ThreeGaugesProps) => {
   return (
     <Wrapper>

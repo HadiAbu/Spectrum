@@ -23,7 +23,10 @@ interface DialogProps {
   stats: Stats;
 }
 /**
- * Our Dialog componenet to display the status of the rocket when action is required
+ * @param open: boolean to set dialog visibility
+ * @param onClose: function to close the dialog
+ * @param stats: the data we display
+ * @returns Our Dialog componenet to display the status of the rocket when action is required
  */
 const Dialog = ({ open, onClose, stats }: DialogProps) => {
   const actionRequired = async () => {

@@ -25,7 +25,6 @@ function App() {
       const data = await resp.data;
 
       setStats(data);
-      console.log(data);
     } catch (error) {
       console.error(error);
     } finally {
