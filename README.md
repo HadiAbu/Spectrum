@@ -8,21 +8,17 @@ To run this project, run the following commands in the terminal:
 2. npm run dev
 
 Task 1:
-
-in main.tsx file comment out the App2 component and add App component
+In main.tsx file comment out the App2 component and add App component
 
 Task 2:
-
-in main.tsx file comment out the App component and add App2 component
+In main.tsx file comment out the App component and add App2 component
 
 Task 3:
+Please comment on potential improvements of the API structure, deviations from common standards or performance enhancements:
 
-Please comment on potential improvements of the API structure, deviations from common standards or performance enhancements.
+Answer:
 
-answer:
-
-1. adding pause/continue API options for better communication via the websocket when action is required
-2. making actOnSpectrum API of type POST/PUT
-3. preserve consistency: I would try to make the data keys coming from the APIs as lower case (in the first API endpoint velocity, altitiude, temperature are lower case and in the second these keys are coming back as capitalized)
-4. add timestamps to the objects coming back from the API
-5. adding authentication headers for security.
+1. Making actOnSpectrum API of type POST/PUT
+2. Preserve consistency: I would try to make the data keys coming from the APIs as lower case (in the first API endpoint velocity, altitiude, temperature are lower case and in the second these keys are coming back as capitalized)
+3. Add timestamps to the objects coming back from the API
+4. Adding authentication headers for security.
